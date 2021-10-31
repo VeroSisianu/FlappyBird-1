@@ -16,9 +16,9 @@ public class PoolSystem : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if (StateManager.State == StateManager.States.End)
+        if (StateManager.State == StateManager.States.End || StateManager.State == StateManager.States.Begin)
             return;
-        if (timer == 300)
+        if (timer == 110)
         {
             timer = 0;
             Pool();
@@ -35,7 +35,7 @@ public class PoolSystem : MonoBehaviour
             randomYPositions[0] = Random.Range(3f, 5f);
             randomYPositions[1] = Random.Range(-3f, -1f);
 
-            var index = Random.Range(0, 1);
+            var index = Random.Range(0, 2);
 
             if (randomYPositions[index] >= 3)
                 DeactivatedObstacles[random].GetComponent<SpriteRenderer>().flipY = true;
@@ -45,8 +45,6 @@ public class PoolSystem : MonoBehaviour
             DeactivatedObstacles[random].transform.position = new Vector3(4.4f, randomYPositions[index], 0);
             DeactivatedObstacles[random].SetActive(true);
             DeactivatedObstacles.Remove(DeactivatedObstacles[random]);
-
-            Debug.Log(randomYPositions[index]);
         }
     }
 

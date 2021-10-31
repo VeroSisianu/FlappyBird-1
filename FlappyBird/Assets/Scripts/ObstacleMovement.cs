@@ -8,7 +8,7 @@ public class ObstacleMovement : MonoBehaviour
 
     void Update()
     {
-        if (StateManager.State == StateManager.States.End)
+        if (StateManager.State == StateManager.States.End || StateManager.State == StateManager.States.Begin)
             return;
         transform.position += Speed * Time.deltaTime * Vector3.left;
     }

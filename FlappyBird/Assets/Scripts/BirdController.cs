@@ -13,9 +13,15 @@ public class BirdController : MonoBehaviour
     }
     private void Update()
     {
-        if (StateManager.State == StateManager.States.End)
+        if (StateManager.State == StateManager.States.End || StateManager.State == StateManager.States.Begin)
         {
-            anim.SetBool("isAlive", false);
+            if(anim.GetBool("isAlive") == true)
+                anim.SetBool("isAlive", false);
+            return;
+        }
+        else if(anim.GetBool("isAlive") == false && StateManager.State == StateManager.States.Play)
+        {
+            anim.SetBool("isAlive", true);
             return;
         }
         CheckForInput();

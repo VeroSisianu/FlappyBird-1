@@ -9,4 +9,9 @@ public class StateManager : MonoBehaviour
     {
         Begin, Play, End
     }
+
+    public void Awake()
+    {
+        State = States.Begin;
+    }
 }
