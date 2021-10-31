@@ -5,7 +5,7 @@ using UnityEngine;
 public class PoolSystem : MonoBehaviour
 {
     public List<GameObject> Obstacles = new List<GameObject>();
-    private List<GameObject> DeactivatedObstacles = new List<GameObject>();
+    public List<GameObject> DeactivatedObstacles = new List<GameObject>();
     private float[] randomYPositions = new float[2];
     private int timer = 0;
 
@@ -16,6 +16,8 @@ public class PoolSystem : MonoBehaviour
 
     private void FixedUpdate()
     {
+        if (StateManager.State == StateManager.States.End)
+            return;
         if (timer == 300)
         {
             timer = 0;

@@ -5,9 +5,19 @@ using UnityEngine;
 public class BirdController : MonoBehaviour
 {
     public float Speed = 1f;
+    private Animator anim;
 
+    private void Awake()
+    {
+        anim = GetComponent<Animator>();
+    }
     private void Update()
     {
+        if (StateManager.State == StateManager.States.End)
+        {
+            anim.SetBool("isAlive", false);
+            return;
+        }
         CheckForInput();
         CheckIfIsFalling();
     }
