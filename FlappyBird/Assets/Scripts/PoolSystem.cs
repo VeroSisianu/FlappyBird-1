@@ -30,22 +30,23 @@ public class PoolSystem : MonoBehaviour
     {
         if (DeactivatedObstacles.Count != 0)
         {
-            var random = Random.Range(0, DeactivatedObstacles.Count - 1);
+            var randomIndexUp = Random.Range(0, DeactivatedObstacles.Count - 1);
+            var randomUpPosition = Random.Range(6f, 8f);
+            DeactivatedObstacles[randomIndexUp].GetComponent<SpriteRenderer>().flipY = true;
+            MakeObjectReadyForPool(randomIndexUp, randomUpPosition);
 
-            randomYPositions[0] = Random.Range(3f, 5f);
-            randomYPositions[1] = Random.Range(-3f, -1f);
-
-            var index = Random.Range(0, 2);
-
-            if (randomYPositions[index] >= 3)
-                DeactivatedObstacles[random].GetComponent<SpriteRenderer>().flipY = true;
-            else
-                DeactivatedObstacles[random].GetComponent<SpriteRenderer>().flipY = false;
-
-            DeactivatedObstacles[random].transform.position = new Vector3(4.4f, randomYPositions[index], 0);
-            DeactivatedObstacles[random].SetActive(true);
-            DeactivatedObstacles.Remove(DeactivatedObstacles[random]);
+            var randomIndexDown = Random.Range(0, DeactivatedObstacles.Count - 1);
+            var randomDownPosition = Random.Range(-6f, -3f);
+            DeactivatedObstacles[randomIndexDown].GetComponent<SpriteRenderer>().flipY = false;
+            MakeObjectReadyForPool(randomIndexDown, randomDownPosition);
         }
+    }
+
+    private void MakeObjectReadyForPool(int randomIndex, float randomPosition)
+    {
+        DeactivatedObstacles[randomIndex].transform.position = new Vector3(4.4f, randomPosition, 0);
+        DeactivatedObstacles[randomIndex].SetActive(true);
+        DeactivatedObstacles.Remove(DeactivatedObstacles[randomIndex]);
     }
 
     private void CreateAllObstacles()

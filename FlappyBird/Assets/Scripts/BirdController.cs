@@ -4,7 +4,13 @@ using UnityEngine;
 
 public class BirdController : MonoBehaviour
 {
-    public float Speed = 1f;
+    public float UpSpeed = 1f;
+    public float DownSpeed = 1f;
+    public float UpCount = 0;
+
+
+    private bool isGoingUp;
+
     private Animator anim;
 
     private void Awake()
@@ -30,22 +36,38 @@ public class BirdController : MonoBehaviour
 
     void CheckForInput()
     {
-        if (Input.GetMouseButtonDown(0) || Input.GetMouseButtonUp(0))
+        //if (Input.GetMouseButtonDown(0) || Input.GetMouseButtonUp(0))
+        //{
+        //    Speed = 1;
+        //}
+        //if (Input.GetMouseButton(0))
+        //{
+        //    transform.position += Vector3.up * Time.deltaTime * Speed;
+        //    Speed += 0.03f;
+        //}
+
+        if(isGoingUp)
         {
-            Speed = 1;
+            transform.position += Vector3.up * Time.deltaTime * UpSpeed;
+            UpCount++;
         }
-        if (Input.GetMouseButton(0))
+
+        if (UpCount == 8)
         {
-            transform.position += Vector3.up * Time.deltaTime * Speed;
-            Speed += 0.03f;
+            isGoingUp = false;
+        }
+
+        if (Input.GetMouseButtonDown(0))
+        {
+            isGoingUp = true;
+            UpCount = 0;
         }
     }
     void CheckIfIsFalling()
     {
-        if (!Input.GetMouseButton(0))
+        if (!isGoingUp)
         {
-            transform.position += Vector3.down * Time.deltaTime * Speed;
-            Speed += 0.03f;
+            transform.position += Vector3.down * Time.deltaTime * DownSpeed;
         }
     }
 }
