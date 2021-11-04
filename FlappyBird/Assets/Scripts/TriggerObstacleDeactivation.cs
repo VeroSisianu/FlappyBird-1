@@ -10,6 +10,8 @@ public class TriggerObstacleDeactivation : MonoBehaviour
         if (collision.CompareTag("Obstacle"))
         {
             collision.gameObject.SetActive(false);
+            if (collision.gameObject.transform.position.y <= -3)
+                collision.gameObject.transform.GetChild(0).gameObject.SetActive(false);
             ThePoolSystem.DeactivatedObstacles.Add(collision.gameObject);
         }
     }

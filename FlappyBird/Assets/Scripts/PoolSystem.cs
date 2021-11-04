@@ -6,8 +6,8 @@ public class PoolSystem : MonoBehaviour
 {
     public List<GameObject> Obstacles = new List<GameObject>();
     public List<GameObject> DeactivatedObstacles = new List<GameObject>();
-    private float[] randomYPositions = new float[2];
     private int timer = 0;
+    public GameObject TriggerScore;
 
     private void Awake()
     {
@@ -38,6 +38,7 @@ public class PoolSystem : MonoBehaviour
             var randomIndexDown = Random.Range(0, DeactivatedObstacles.Count - 1);
             var randomDownPosition = Random.Range(-6f, -3f);
             DeactivatedObstacles[randomIndexDown].GetComponent<SpriteRenderer>().flipY = false;
+            DeactivatedObstacles[randomIndexDown].transform.GetChild(0).gameObject.SetActive(true);
             MakeObjectReadyForPool(randomIndexDown, randomDownPosition);
         }
     }
